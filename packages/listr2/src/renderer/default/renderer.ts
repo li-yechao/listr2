@@ -147,8 +147,8 @@ export class DefaultRenderer implements ListrRenderer {
 
     if (options.bottomBar && renderBottomBar.length > 0) {
       if (this.options.placeBottomBarToTop) {
-        render.push(...renderBottomBar)
-        render.push('')
+        render.unshift('')
+        render.unshift(...renderBottomBar)
       } else {
         if (render.length > 0) {
           render.push('')
