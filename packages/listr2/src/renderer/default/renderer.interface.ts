@@ -146,6 +146,13 @@ export interface ListrDefaultRendererOptions
    * @defaultValue `PRESET_TIMER`
    */
   pausedTimer?: PresetTimer
+
+  /**
+   * Place the bottom bar to the top of the screen.
+   *
+   * @defaultValue `false`
+   */
+  placeBottomBarToTop?: boolean
 }
 
 export interface ListrDefaultRendererTaskOptions extends RendererPresetTimer {

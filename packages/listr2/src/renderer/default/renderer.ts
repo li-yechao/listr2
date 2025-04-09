@@ -146,11 +146,16 @@ export class DefaultRenderer implements ListrRenderer {
     }
 
     if (options.bottomBar && renderBottomBar.length > 0) {
-      if (render.length > 0) {
-        render.push('')
-      }
+      if (this.options.placeBottomBarToTop) {
+        render.unshift('')
+        render.unshift(...renderBottomBar)
+      } else {
+        if (render.length > 0) {
+          render.push('')
+        }
 
-      render.push(...renderBottomBar)
+        render.push(...renderBottomBar)
+      }
     }
 
     if (options.prompt && renderPrompt.length > 0) {
