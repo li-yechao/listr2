@@ -2,6 +2,10 @@
 // with MIT license, since it is again ESM only
 // we needed to stop on the first failing case unlike the original
 export class Concurrency {
+  promise: Promise<void>
+
+  private resolve: () => void
+  private reject: (error: Error) => void
   private concurrency: number
   private count: number
   private queue: Set<() => void>
@@ -10,6 +14,7 @@ export class Concurrency {
     this.concurrency = options.concurrency
     this.count = 0
     this.queue = new Set()
+    this.initPromise()
   }
 
   public add<T>(fn: () => Promise<T>): Promise<T> {
@@ -22,6 +27,14 @@ export class Concurrency {
 
       this.queue.add(callback)
     })
+  }
+
+  private initPromise (): void {
+    const { promise, resolve, reject } = Promise.withResolvers<void>()
+
+    this.promise = promise.finally(() => this.initPromise())
+    this.resolve = resolve
+    this.reject = reject
   }
 
   private flush (): void {
@@ -45,10 +58,15 @@ export class Concurrency {
       this.count--
 
       this.flush()
+
+      if (this.count === 0) {
+        this.resolve()
+      }
     }
 
-    promise.then(cleanup, () => {
+    promise.then(cleanup, (error) => {
       this.queue.clear()
+      this.reject(error)
     })
 
     return promise
