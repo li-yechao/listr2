@@ -577,6 +577,6 @@ export class DefaultRenderer implements ListrRenderer {
   }
 
   private indent (str: string, i: number): string {
-    return i > 0 ? indent(str, this.options.indentation) : str
+    return i > 0 ? indent(str.trimEnd(), this.options.indentation) : str.trimEnd()
   }
 }

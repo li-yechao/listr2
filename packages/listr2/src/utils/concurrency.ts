@@ -10,7 +10,7 @@ export class Concurrency {
   private count: number
   private queue: Set<() => void>
 
-  constructor(options: { concurrency: number }) {
+  constructor (options: { concurrency: number }) {
     this.concurrency = options.concurrency
     this.count = 0
     this.queue = new Set()
@@ -29,7 +29,7 @@ export class Concurrency {
     })
   }
 
-  private initPromise(): void {
+  private initPromise (): void {
     const { promise, resolve, reject } = this.withResolvers<void>()
 
     this.promise = promise.finally(() => this.initPromise())
@@ -37,7 +37,7 @@ export class Concurrency {
     this.reject = reject
   }
 
-  private flush(): void {
+  private flush (): void {
     for (const callback of this.queue) {
       if (this.count >= this.concurrency) {
         break
@@ -72,7 +72,7 @@ export class Concurrency {
     return promise
   }
 
-  private withResolvers<T>(): { promise: Promise<T>; resolve: (value: T) => void; reject: (error: Error) => void } {
+  private withResolvers<T>(): { promise: Promise<T>, resolve: (value: T) => void, reject: (error: Error) => void } {
     let resolve: (value: T) => void
     let reject: (error: Error) => void
 
