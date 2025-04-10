@@ -113,7 +113,7 @@ export class DefaultRenderer implements ListrRenderer {
 
     if (output) {
       this.updater.clear()
-      this.logger.process.toStdout(output, false)
+      this.logger.process.toStdout(output)
     }
     this.updater(tasks)
   }
@@ -128,7 +128,7 @@ export class DefaultRenderer implements ListrRenderer {
     const [ tasks, output ] = this.create({ prompt: false })
 
     if (output) {
-      this.logger.process.toStdout(output, false)
+      this.logger.process.toStdout(output)
     }
 
     // directly write to process.stdout, since logupdate only can update the seen height of terminal
