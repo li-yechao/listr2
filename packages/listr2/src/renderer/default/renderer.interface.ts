@@ -148,11 +148,12 @@ export interface ListrDefaultRendererOptions
   pausedTimer?: PresetTimer
 
   /**
-   * Place the bottom bar to the top of the screen.
+   * Directly write the output to the stdout stream (just like a normal console.log) instead of the bottom bar.
+   * It needs to enable `bottomBar` option to work.
    *
    * @defaultValue `false`
    */
-  placeBottomBarToTop?: boolean
+  writeBottomBarDirectly?: boolean
 }
 
 export interface ListrDefaultRendererTaskOptions extends RendererPresetTimer {

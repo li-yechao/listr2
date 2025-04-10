@@ -1,3 +1,17 @@
+## listr2 [8.3.1](https://github.com/listr2/listr2/compare/listr2@8.3.0...listr2@8.3.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* keep whitespace of output for default renderer ([2efe4d0](https://github.com/listr2/listr2/commit/2efe4d0cf37762f1e259268c696455fd82ea3bdb))
+
+# listr2 [8.3.0](https://github.com/listr2/listr2/compare/listr2@8.2.5...listr2@8.3.0) (2025-04-09)
+
+
+### Features
+
+* add dynamic icon support for logger ([4d3d022](https://github.com/listr2/listr2/commit/4d3d022f80397bd80de2b18b8139b8da6213e664))
+
 ## listr2 [8.2.5](https://github.com/listr2/listr2/compare/listr2@8.2.4...listr2@8.2.5) (2024-10-03)
 
 
