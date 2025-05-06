@@ -82,6 +82,17 @@ export class Listr<
       this.events = new ListrEventManager()
     }
 
+    /* istanbul ignore if */
+    if (this.options?.forceTTY || process.env[ListrEnvironmentVariables.FORCE_TTY]) {
+      process.stdout.isTTY = true
+      process.stderr.isTTY = true
+    }
+
+    /* istanbul ignore if */
+    if (this.options?.forceUnicode) {
+      process.env[ListrEnvironmentVariables.FORCE_UNICODE] = '1'
+    }
+
     // get renderer class
     const renderer = getRenderer({
       renderer: this.options.renderer,
@@ -105,17 +116,6 @@ export class Listr<
     if (this.options.registerSignalListeners) {
       this.boundSignalHandler = this.signalHandler.bind(this)
       process.once('SIGINT', this.boundSignalHandler).setMaxListeners(0)
-    }
-
-    /* istanbul ignore if */
-    if (this.options?.forceTTY || process.env[ListrEnvironmentVariables.FORCE_TTY]) {
-      process.stdout.isTTY = true
-      process.stderr.isTTY = true
-    }
-
-    /* istanbul ignore if */
-    if (this.options?.forceUnicode) {
-      process.env[ListrEnvironmentVariables.FORCE_UNICODE] = '1'
     }
   }
 
